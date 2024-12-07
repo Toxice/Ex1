@@ -1,4 +1,6 @@
 package Assigment1;
+
+
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
@@ -22,18 +24,19 @@ public class Ex1 {
         public static int number2Int(String num) {
             int ans = -1;
             // add your code here
-
-            ////////////////////
+            if (!isNumber(num)) {
+                ans = num2Decimal(num);
+            }
             return ans;
         }
 
     /**
      * gets an input a String representing a number in base [2,16], returns a substring of the number's value in that same base
-     * @param num input, String representing the number in base [2,16]
+     * @param num1 input, String representing the number in base [2,16]
      * @return the number as a String
      */
-    public static String getNumber(String num) { // "10101110b2"
-         return num.substring(0, num.indexOf("b"));
+    public static String getNumber(String num1) { // "10101110b2"
+         return num1.substring(0, num1.indexOf("b"));
         }
 
     /**
@@ -50,38 +53,50 @@ public class Ex1 {
      * run over every char element of the given string
      * start from the last index of the string, multiply every element in the base to the power of the iterator (i in that case)
      * @param number the number represented in the String
-     * @param base the base represented in the String
      * @return the total value of all iterations combined (or equivalently, the value of the number after converting to decimal)
      */
-    public static int num2Decimal(String number, String base) {
+    public static int num2Decimal(String number) {
+        StringBuilder numberString = new StringBuilder(getNumber(number));
+        numberString.reverse();
         int decimalSum = 0;
-        for (int i = 0; i < number.length() ; i++) {
-            number.charAt(number.length() - 1 - i);
-            decimalSum += char2Int(number.charAt(number.length() - 1 - i)) * Math.pow(valueOf(base), i);
+        int base = valueOf(getBase(number));
+        for (int i = 0; i < numberString.length(); i++) {
+            decimalSum += char2Int(numberString.charAt(i)) * Math.pow(base, i);
         }
         return decimalSum;
     }
 
-    public static String decimal2Base(int decimal, int base) {
-        String newBase = "";
+    /**
+     * Gets Input of a number in a given base and return's the number in decimal notation
+     * @param number the number
+     * @param base the redix (the base)
+     * @return
+     */
+    public static StringBuilder decimal2Base(int number, int base) {
+        StringBuilder decimal  = new StringBuilder();
         int remainder = 0, sum = 0;
-        while (decimal > 0) {
-            remainder = decimal % base;
-            newBase = newBase + remainder;
-            decimal = decimal/base;
+        while (number > 0) {
+            remainder = number % base;
+            decimal.append(remainder);
+            number = number / base;
             }
-        return newBase;
+        StringBuilder decimalNotation = new StringBuilder(decimal);
+        return decimalNotation.reverse();
     }
 
-
+    /**
+     * a Wrapper for the Integer.parseInt() function
+     * @param number a String, representing a number
+     * @return the value of the number inside the String
+     */
     public static int valueOf(String number) {
         return Integer.parseInt(number);
     }
 
     /**
-     *
-     * @param letter
-     * @return
+     * Takes a char representing a number and converts it to an int
+     * @param letter a char representing a number
+     * @return the number the char represented
      */
     public static int char2Int(char letter) {
 
@@ -100,9 +115,7 @@ public class Ex1 {
          */
         public static boolean isNumber(String a) {
             boolean ans = true;
-            // add your code here
-
-            ////////////////////
+            ans = isValid(a);
             return ans;
         }
 
@@ -117,9 +130,29 @@ public class Ex1 {
         public static String int2Number(int num, int base) {
             String ans = "";
             // add your code here
-
+            if (isValid(Integer.toString(num))) {
+                ans = decimal2Base(num, base).toString();
+            }
             ////////////////////
             return ans;
+        }
+
+    /**
+     * Checks if the given number is fit to the base
+     * @return true if the number template is valid, false if the number template is not valid
+     * Example
+     */
+    public static boolean isValid(String number) {
+        int baseValue = valueOf(getBase(number));
+        if (baseValue <= 2 && baseValue >= 16) {
+            return false;
+        }
+            for (int i = 0; i < number.length(); i++) {
+                if (char2Int(number.charAt(i)) >= baseValue) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         /**
@@ -131,10 +164,16 @@ public class Ex1 {
         public static boolean equals(String n1, String n2) {
             boolean ans = true;
             // add your code here
-
-            ////////////////////
+            if (valueOf(n1) != valueOf(n2)) {
+                ans = false;
+            }
             return ans;
         }
+
+        public static String[] stringArray(String n1, String n2, String Product, String Sum) {
+            return new String[]{n1, n1, Product, Sum};
+        }
+
 
         /**
          * This static function search for the array index with the largest number (in value).
@@ -147,8 +186,13 @@ public class Ex1 {
         public static int maxIndex(String[] arr) {
             int ans = 0;
             // add your code here
-
-            ////////////////////
+            int indexCounter = 0;
+            for (int i = 0; i < arr.length; i++) {
+                if (valueOf(arr[i]) > valueOf(arr[0])) {
+                    indexCounter = indexCounter + 1;
+                }
+            }
+            ans = indexCounter;
             return ans;
         }
 }

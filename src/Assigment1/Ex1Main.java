@@ -20,7 +20,12 @@ public class Ex1Main {
 
                 /////////////////////
             }
+            System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
+            if (!num2.equals("quit")) {
+
+            }
         }
         System.out.println("quiting now...");
+        System.exit(0);
     }
 }
