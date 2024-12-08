@@ -103,7 +103,7 @@ public class Ex1 {
         if(letter >= '0' && letter <= '9'){
             return letter -'0';
         } else if(letter >= 'A' && letter <= 'G') {
-                int n = letter -'A' + 10;
+                return letter -'A' + 10;
             }
             return -1;
         }
@@ -129,26 +129,34 @@ public class Ex1 {
          */
         public static String int2Number(int num, int base) {
             String ans = "";
-            // add your code here
             if (isValid(Integer.toString(num))) {
                 ans = decimal2Base(num, base).toString();
             }
-            ////////////////////
             return ans;
         }
 
     /**
      * Checks if the given number is fit to the base
      * @return true if the number template is valid, false if the number template is not valid
-     * Example
      */
     public static boolean isValid(String number) {
-        int baseValue = valueOf(getBase(number));
-        if (baseValue <= 2 && baseValue >= 16) {
+        int baseInteger = valueOf(getBase(number));
+        int baseCharacter = char2Int(number.charAt(0));
+
+        if (number.length() > 1) { // the base can only contain a single character, a single digit from 0 to 9 or a single letter from A to G
+            return false;
+        }
+
+        if (baseCharacter < 2 && baseCharacter > 16) {
             return false;
         }
             for (int i = 0; i < number.length(); i++) {
-                if (char2Int(number.charAt(i)) >= baseValue) {
+                if (char2Int(number.charAt(i)) > baseInteger || Character.isLowerCase(number.charAt(i))) {
+                    /*
+                    Checks if the current digit of the number is bigger than the base
+                    or
+                    if any of the characters are in lower case (the given characters can only be upper case)
+                     */
                     return false;
                 }
             }
