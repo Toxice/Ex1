@@ -238,33 +238,30 @@ public class Ex1 {
 
     public static boolean isFormatValid(String number) {
         if (!number.contains("b")) { // if the given number in base 10
-            if (Integer.signum(valueOf(number)) < 0 || !number.matches("[A-G]")) {
+            if ((Integer.signum(valueOf(number)) < 0 || !number.matches("[A-G]")) && !isDecimal(number)) {
                 return false;
-            }
-            else if (isDecimal(number)) {
-                return true;
-            }
-        } else {
-            int baseInteger = 0;
-            String base = number.substring(number.indexOf("b") + 1, number.length());
-            if ((base.length() != 1) && (!base.matches("[2-9A-G]"))) {
-                return false;
-            }
-            if (base.matches("[A-G]")) {
-                baseInteger = char2Int(base.charAt(0));
-            }
-            if (base.matches("[2-9]")) {
-                baseInteger = char2Int(base.charAt(0));
-            }
-            for (char redix : getNumber(number).toCharArray()) {
-                if (Character.isLetter(redix)) {
-                    if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
-                        return false;
-                    }
+            } else {
+                int baseInteger = 0;
+                String base = number.substring(number.indexOf("b") + 1, number.length());
+                if ((base.length() != 1) && (!base.matches("[2-9A-G]"))) {
+                    return false;
                 }
-                if (Character.isDigit(redix)) {
-                    if (((redix - '0') > baseInteger)) {
-                        return false;
+                if (base.matches("[A-G]")) {
+                    baseInteger = char2Int(base.charAt(0));
+                }
+                if (base.matches("[2-9]")) {
+                    baseInteger = char2Int(base.charAt(0));
+                }
+                for (char redix : getNumber(number).toCharArray()) {
+                    if (Character.isLetter(redix)) {
+                        if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
+                            return false;
+                        }
+                    }
+                    if (Character.isDigit(redix)) {
+                        if (((redix - '0') > baseInteger)) {
+                            return false;
+                        }
                     }
                 }
             }
@@ -274,7 +271,7 @@ public class Ex1 {
 
     public static boolean isDecimal(String number) {
         for (char digit : number.toCharArray()) {
-            if (char2Int(digit) > 10 || Character.isLetter(digit)) {
+            if ((char2Int(digit) > 10) && Character.getNumericValue(digit) > 0 || Character.isLetter(digit)) {
                 return false;
             }
         }
