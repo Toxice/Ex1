@@ -190,7 +190,7 @@ public class Ex1 {
         int baseInteger = 0;
 
         if (number.contains("b")) {
-            if (!validBase(number)) {
+            if (validBase(number)) {
                 String base = number.substring(number.indexOf("b") + 1, number.length());
                 if (base.matches("[A-G]")) {
                     baseInteger = char2Int(base.charAt(0));
@@ -224,14 +224,43 @@ public class Ex1 {
         return false;
     }
 
+    public static boolean isBase(String base) {
+        int Base = valueOf(base);
+        if (Base >= 2 && Base <= 16) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean isFormatValid(String number) {
         if (!number.contains("b")) { // if the given number in base 10
             return isDecimal(number);
         } else {
-            boolean isNumberValid = (validBase(number) && isValid(number));
-            return isNumberValid;
+            int baseInteger = 0;
+            String base = number.substring(number.indexOf("b") + 1, number.length());
+            if ((base.length() != 1) && (!base.matches("[2-9A-G]"))) {
+                return false;
+            }
+            if (base.matches("[A-G]")) {
+                baseInteger = char2Int(base.charAt(0));
+            }
+            if (base.matches("[2-9]")) {
+                baseInteger = char2Int(base.charAt(0));
+            }
+            for (char redix : getNumber(number).toCharArray()) {
+                if (Character.isLetter(redix)) {
+                    if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
+                        return false;
+                    }
+                }
+                if (Character.isDigit(redix)) {
+                    if (((redix - '0') > baseInteger)) {
+                        return false;
+                    }
+                }
+            }
         }
-
+        return true;
     }
 
     public static boolean isDecimal(String number) {
@@ -290,8 +319,22 @@ public class Ex1 {
         return ans;
     }
 
+    public static void maxIndexPrint(String[] arr, int maxIndex) {
+        StringBuilder str = new StringBuilder("max index over ");
+        for (String index : arr) {
+            str.append("[" + index + ",");
+        }
+        str.append("] is " + arr[maxIndex]);
+        System.out.println(str);
+    }
 
-    public static void sumOf(String num1, String num2, String base) {
+    /**
+     *
+     * @param num1
+     * @param num2
+     * @param base
+     */
+    public static String sumOf(String num1, String num2, String base) {
         if (isFormatValid(num1) && isFormatValid(num2)) {
             String onlyNum1 = getNumber(num1);
             String onlyNum2 = getNumber(num2);
@@ -300,17 +343,19 @@ public class Ex1 {
             int decimalSum = Num1 + Num2;
             int baseValue = valueOf(base);
             String sumByBase = String.valueOf(decimal2Base(decimalSum, baseValue));
-            System.out.println(num1 + " + " + num2 + " = " + num2Template(sumByBase, base));
+            return sumByBase;
+            //System.out.println(num1 + " + " + num2 + " = " + num2Template(sumByBase, base));
         }
+        return "";
     }
 
-//        public static void productOf(String num1,String num2, String base) {
-//            int product = number2Int(num1) * number2Int(num2);
-//            StringBuilder Product = decimal2Base(product, valueOf(base));
-//            System.out.println(num1 + " * " + num2 + " = " + num2Template(String.valueOf(Product), base));
-//        }
-
-    public static void productOf(String num1, String num2, String base) {
+    /**
+     *
+     * @param num1
+     * @param num2
+     * @param base
+     */
+    public static String productOf(String num1, String num2, String base) {
         if (isFormatValid(num1) && isFormatValid(num2)) {
             String onlyNum1 = getNumber(num1);
             String onlyNum2 = getNumber(num2);
@@ -319,7 +364,9 @@ public class Ex1 {
             int decimalSum = Num1 * Num2;
             int baseValue = valueOf(base);
             String sumByBase = String.valueOf(decimal2Base(decimalSum, baseValue));
-            System.out.println(num1 + " + " + num2 + " = " + num2Template(sumByBase, base));
+            return sumByBase;
+            //System.out.println(num1 + " + " + num2 + " = " + num2Template(sumByBase, base));
         }
+        return "";
     }
 }

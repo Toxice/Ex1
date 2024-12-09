@@ -11,7 +11,7 @@ import static Assigment1.Ex1.*;
 public class Ex1Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String num1 = "", num2="", quit = "quit";
+        String num1 = "", num2="", quit = "quit", sum = "", product = "";
         while ((!num1.equals(quit) && !num2.equals(quit))) {
             System.out.println();
             System.out.println("Ex1 class solution:");
@@ -23,6 +23,7 @@ public class Ex1Main {
                 }
                 else {
                     ErrorPrint(num1);
+                    main(null);
                 }
                 /////////////////////
             }
@@ -30,16 +31,23 @@ public class Ex1Main {
             num2 = sc.next();
             if (!num2.equals("quit")) {
                 if (isNumber(num2)) {
-                    System.out.println("num2 = " + num2 + "is number : " + isNumber(num2));
+                    System.out.println("num2 = " + num2 + " is number : " + isNumber(num2));
                 }
                 else {
                     ErrorPrint(num2);
+                    main(null);
                 }
             }
             System.out.println("Enter a base for Output, [2,16]");
             String base = sc.next();
-            sumOf(num1, num2, base);
-            productOf(num1, num2, base);
+            if (isBase(base)) {
+            sum = sumOf(num1, num2, base);
+            product = productOf(num1, num2, base);
+            System.out.println(num1 + " + " + num2 + " = " + num2Template(sum, base));
+            System.out.println(num1 + " * " + num2 + " = " + num2Template(product, base));
+        } else {
+                main(null);
+            }
         }
         System.out.println();
 
