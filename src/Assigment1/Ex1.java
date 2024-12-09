@@ -238,7 +238,7 @@ public class Ex1 {
 
     public static boolean isFormatValid(String number) {
         if (!number.contains("b")) { // if the given number in base 10
-            if (Integer.signum(valueOf(number)) < 0) {
+            if (Integer.signum(valueOf(number)) < 0 || !number.matches("[A-G]")) {
                 return false;
             }
             else if (isDecimal(number)) {
