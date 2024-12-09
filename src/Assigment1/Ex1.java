@@ -32,6 +32,10 @@ public class Ex1 {
         if (!isNumber(num)) {
             ans = num2Decimal(num);
         }
+        if (valueOf(num) < 0) {
+            ans = -1;
+        }
+
         return ans;
     }
 
@@ -234,7 +238,12 @@ public class Ex1 {
 
     public static boolean isFormatValid(String number) {
         if (!number.contains("b")) { // if the given number in base 10
-            return isDecimal(number);
+            if (Integer.signum(valueOf(number)) < 0) {
+                return false;
+            }
+            else if (isDecimal(number)) {
+                return true;
+            }
         } else {
             int baseInteger = 0;
             String base = number.substring(number.indexOf("b") + 1, number.length());

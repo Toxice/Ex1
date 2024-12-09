@@ -19,7 +19,7 @@ public class Ex1Main {
             num1 = sc.next();
              if (!num1.equals("quit")) {
                 if (isNumber(num1)) {
-                    System.out.println("num1 = " + num1 + " is number : " + isNumber(num1));
+                    System.out.println("num1 = " + num1 + " is number : " + isNumber(num1) + " , value: " + number2Int(num1));
                 }
                 else {
                     ErrorPrint(num1);
@@ -31,7 +31,7 @@ public class Ex1Main {
             num2 = sc.next();
             if (!num2.equals("quit")) {
                 if (isNumber(num2)) {
-                    System.out.println("num2 = " + num2 + " is number : " + isNumber(num2));
+                    System.out.println("num2 = " + num2 + " is number : " + isNumber(num2) + ", value: " + number2Int(num2));
                 }
                 else {
                     ErrorPrint(num2);
@@ -46,6 +46,7 @@ public class Ex1Main {
             System.out.println(num1 + " + " + num2 + " = " + num2Template(sum, base));
             System.out.println(num1 + " * " + num2 + " = " + num2Template(product, base));
         } else {
+                System.out.println("ERR: Wrong base, should get [2,16] got " + base);
                 main(null);
             }
         }
