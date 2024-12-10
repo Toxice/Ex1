@@ -31,8 +31,8 @@ public class Ex1 {
     }
 
     /**
+     * side method used to extract the number from the <number>b<base> template
      * gets an input a String representing a number in base [2,16], returns a substring of the number's value in that same base
-     *
      * @param num1 input, String representing the number in base [2,16]
      * @return the number as a String
      */
@@ -44,8 +44,8 @@ public class Ex1 {
     }
 
     /**
+     * side method used to extract the base from the <number>b<base> template
      * gets an input a String representing a number in base [2,16], returns a substring of the number's base
-     *
      * @param base input, the number's base
      * @return the base as a String
      */
@@ -97,7 +97,7 @@ public class Ex1 {
      */
     public static StringBuilder decimal2Base(int number, int base) {
         StringBuilder decimal = new StringBuilder();
-        int remainder = 0, sum = 0;
+        int remainder = 0;
         while (number != 0) {
             remainder = number % base;
             decimal.append(remainder);
@@ -124,7 +124,6 @@ public class Ex1 {
     public static int char2Int(char letter) {
 
         if (letter >= '0' && letter <= '9') {
-            //return letter -'0';
             return Character.getNumericValue(letter);
         } else if (letter >= 'A' && letter <= 'Z') {
             return (letter - 'A') + 10;
@@ -135,7 +134,7 @@ public class Ex1 {
     /**
      * checks if the given string is a valid number
      * @param a String representing a number
-     * @return true if the given String is in a number format
+     * @return true if the given String is in a number format, false otherwise
      */
     public static boolean isNumber(String a) {
         boolean ans = true;
@@ -160,8 +159,6 @@ public class Ex1 {
         if (base == 10) {
             ans = num + "bA";
         }
-        //if (isValid(Integer.toString(num))) {
-        //if (isFormatValid(Integer.toString(num))) {
           if (isNumber(String.valueOf(num))) {
             String number = decimal2Base(num, base).toString();
             ans = number + "b" + base;
@@ -174,6 +171,7 @@ public class Ex1 {
 
     /**
      * Checks if the input is in a valid template <number>b<base>
+     * the number can only hold values of (0~9) and (A~G)
      * @param number a string representing a number in template <number>b<base>
      * @return true for a valid template, false otherwise
      */
@@ -189,9 +187,6 @@ public class Ex1 {
             if (base.matches("[A-G]") || base.matches("[2-9]")) {
                 baseInteger = char2Int(base.charAt(0));
             }
-//            if (number.contains("-")) { // if the number is negative
-//                return false;
-//            }
             for (char DigitOrLetter : getNumber(number).toCharArray()) {
                 if (Character.isLetterOrDigit(DigitOrLetter)) {
                     if (Character.isLetter(DigitOrLetter)) {
@@ -239,8 +234,6 @@ public class Ex1 {
      */
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
-        // add your code here
-        // check if n1 and n2 are decimal, if not - convert
         String num1 = String.valueOf(num2Decimal(n1));
         String num2 = String.valueOf(num2Decimal(n2));
         if (!num1.equals(num2)) {
@@ -258,7 +251,6 @@ public class Ex1 {
      */
     public static int maxIndex(String[] arr) {
         int ans = 0;
-        // add your code here
         fixArray(arr);
         int indexCounter = 0;
         String max = arr[0];
@@ -273,6 +265,7 @@ public class Ex1 {
 
     /**
      * removing all "b<base> from Strings
+     * Side Method used in maxIndex
      * @param arr String Array
      */
     public static void fixArray(String[] arr) {
@@ -318,26 +311,20 @@ public class Ex1 {
     }
 
     /**
-     *
-     * @param letter
-     * @return
+     * gets the numeric value of a given character
+     * @param letter a character
+     * @return the numeric value of the given character
      */
     public static int getNumericValue(char letter) {
         return (letter - 'A') + 10;
     }
 
     /**
-     * method that checks the Edge Case of 'b' appearing more than once in a given string
-     * @param number a string representing a number
-     * @return true if 'b' is appearing only once, false in 'b' appears more than once
+     * check if a given string has a certain character more than once
+     * @param str a given string
+     * @param targetChar the certain char
+     * @return true if targetChar appears more than once, false otherwise
      */
-    public static boolean isCharAppearsMoreThanOnce(String number) {
-        if (number.indexOf("b") != number.lastIndexOf("b")) {
-            return false;
-        }
-        return true;
-    }
-
     public static boolean countOccurrences(String str, char targetChar) {
         int count = 0;
         for (int i = 0; i < str.length(); i++) {
