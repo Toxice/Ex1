@@ -65,6 +65,9 @@ public class Ex1 {
      * @return the total value of all iterations combined (or equivalently, the value of the number after converting to decimal)
      */
     public static int num2Decimal(String number) {
+        if (!number.contains("b")) {
+            number = number + "bA";
+        }
         StringBuilder numberString = new StringBuilder(getNumber(number));
         numberString.reverse();
         int decimalSum = 0;
@@ -158,7 +161,8 @@ public class Ex1 {
             ans = num + "bA";
         }
         //if (isValid(Integer.toString(num))) {
-        if (isFormatValid(Integer.toString(num))) {
+        //if (isFormatValid(Integer.toString(num))) {
+          if (isNumber(String.valueOf(num))) {
             String number = decimal2Base(num, base).toString();
             ans = number + "b" + base;
         }
@@ -226,7 +230,10 @@ public class Ex1 {
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
         // add your code here
-        if (valueOf(n1) != valueOf(n2)) {
+        // check if n1 and n2 are decimal, if not - convert
+        String num1 = String.valueOf(num2Decimal(n1));
+        String num2 = String.valueOf(num2Decimal(n2));
+        if (!num1.equals(num2)) {
             ans = false;
         }
         return ans;
