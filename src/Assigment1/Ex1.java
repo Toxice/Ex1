@@ -24,12 +24,7 @@ public class Ex1 {
      */
     public static int number2Int(String num) {
         int ans = -1;
-
-        if (isDecimal(num)) {
-            ans = Integer.parseInt(num);
-        }
-
-        if (!isNumber(num)) {
+        if (isNumber(num)) {
             ans = num2Decimal(num);
         }
         if (num2Decimal(num) < 0) {
@@ -100,11 +95,11 @@ public class Ex1 {
      */
     public static StringBuilder decimal2Base(int number, int base) {
         StringBuilder decimal = new StringBuilder();
-        if (base == 10) {
-            StringBuilder base10 = new StringBuilder();
-            base10.append(number);
-            return base10;
-        }
+//        if (base == 10) {
+//            StringBuilder base10 = new StringBuilder();
+//            base10.append(number);
+//            return base10;
+//        }
         int remainder = 0, sum = 0;
         while (number != 0) {
             remainder = number % base;
@@ -237,23 +232,20 @@ public class Ex1 {
     }
 
     public static boolean isFormatValid(String number) {
-        if (!number.contains("b")) {// if the given number in base 10
-            return isDecimal(number);
+        if (!number.contains("b")) {
+            return false;
         } else {
             int baseInteger = 0;
             String base = number.substring(number.indexOf("b") + 1, number.length());
             if ((base.length() != 1) || !base.matches("[2-9A-G]")) {
                 return false;
             }
-            if (base.matches("[A-G]")) {
-                baseInteger = char2Int(base.charAt(0));
-            }
-            if (base.matches("[2-9]")) {
+            if (base.matches("[A-G]") || base.matches("[2-9]")) {
                 baseInteger = char2Int(base.charAt(0));
             }
             for (char redix : getNumber(number).toCharArray()) {
                 if (Character.isLetter(redix)) {
-                    if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
+                    if ((char2Int(redix) >= baseInteger)) {
                         return false;
                     }
                 }
@@ -341,8 +333,8 @@ public class Ex1 {
         if (isFormatValid(num1) && isFormatValid(num2)) {
             String onlyNum1 = getNumber(num1);
             String onlyNum2 = getNumber(num2);
-            int Num1 = number2Int(onlyNum1);
-            int Num2 = number2Int(onlyNum2);
+            int Num1 = num2Decimal(num1);
+            int Num2 = num2Decimal(num2);
             int decimalSum = Num1 + Num2;
             int baseValue = valueOf(base);
             String sumByBase = String.valueOf(decimal2Base(decimalSum, baseValue));
@@ -362,8 +354,8 @@ public class Ex1 {
         if (isFormatValid(num1) && isFormatValid(num2)) {
             String onlyNum1 = getNumber(num1);
             String onlyNum2 = getNumber(num2);
-            int Num1 = number2Int(onlyNum1);
-            int Num2 = number2Int(onlyNum2);
+            int Num1 = num2Decimal(num1);
+            int Num2 = num2Decimal(num2);
             int decimalSum = Num1 * Num2;
             int baseValue = valueOf(base);
             String sumByBase = String.valueOf(decimal2Base(decimalSum, baseValue));
