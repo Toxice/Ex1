@@ -1,4 +1,5 @@
 package Assigment1;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static Assigment1.Ex1.*;
@@ -22,10 +23,10 @@ public class Ex1Main {
                     System.out.println("num1 = " + num1 + " is number : " + isNumber(num1) + " , value: " + number2Int(num1));
                 }
                 else {
-                    ErrorPrint(num1);
+                    System.out.println("num2 = " + num1 + " is number : " + isNumber(num1) + ", value: " + number2Int(num1));
+                    //ErrorPrint(num1);
                     main(null);
                 }
-                /////////////////////
             }
             System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
             num2 = sc.next();
@@ -34,7 +35,8 @@ public class Ex1Main {
                     System.out.println("num2 = " + num2 + " is number : " + isNumber(num2) + ", value: " + number2Int(num2));
                 }
                 else {
-                    ErrorPrint(num2);
+                    System.out.println("num2 = " + num2 + " is number : " + isNumber(num2) + ", value: " + number2Int(num2));
+                    //ErrorPrint(num2);
                     main(null);
                 }
             }
@@ -45,6 +47,8 @@ public class Ex1Main {
             product = productOf(num1, num2, base);
             System.out.println(num1 + " + " + num2 + " = " + num2Template(sum, base));
             System.out.println(num1 + " * " + num2 + " = " + num2Template(product, base));
+            String arr[] = {num1, num2, sum, product};
+                System.out.println("max number over " + Arrays.toString(arr) + " is " + arr[maxIndex(arr)]);
         } else {
                 System.out.println("ERR: Wrong base, should get [2,16] got " + base);
                 main(null);

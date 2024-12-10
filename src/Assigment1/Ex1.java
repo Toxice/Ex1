@@ -14,7 +14,6 @@ package Assigment1;
  * You should implement the following static functions:
  */
 public class Ex1 {
-
     /**
      * Convert the given number (num) to a decimal representation (as int).
      * It the given number is not in a valid format returns -1.
@@ -66,7 +65,6 @@ public class Ex1 {
     /**
      * run over every char element of the given string
      * start from the last index of the string, multiply every element in the base to the power of the iterator (i in that case)
-     *
      * @param number the number represented in the String
      * @return the total value of all iterations combined (or equivalently, the value of the number after converting to decimal)
      */
@@ -81,17 +79,22 @@ public class Ex1 {
         return decimalSum;
     }
 
+    /**
+     * gets a number and a base as inputs and outputs the number in the template <number>b<base>
+     * @param number a string representing the number
+     * @param base a string representing the base
+     * @return a string in template <number>b<base>
+     */
     public static String num2Template(String number, String base) {
         String delimiter = "b";
         return String.join(delimiter, number, base);
     }
 
     /**
-     * Gets Input of a number in a given base and return's the number in decimal notation
-     *
+     * Gets Input of a number in a decimal and return's the number in the given base
      * @param number the number
-     * @param base   the redix (the base)
-     * @return
+     * @param base the redix (the base)
+     * @return the number converted to the given base
      */
     public static StringBuilder decimal2Base(int number, int base) {
         StringBuilder decimal = new StringBuilder();
@@ -111,7 +114,6 @@ public class Ex1 {
 
     /**
      * a Wrapper for the Integer.parseInt() function
-     *
      * @param number a String, representing a number
      * @return the value of the number inside the String
      */
@@ -121,7 +123,6 @@ public class Ex1 {
 
     /**
      * Takes a char representing a number and converts it to an int
-     *
      * @param letter a char representing a number
      * @return the number the char represented
      */
@@ -136,21 +137,10 @@ public class Ex1 {
         return -1;
     }
 
-    public static int String2Int(String ltr) {
-        char letter = ltr.charAt(0);
-        if (letter >= '0' && letter <= '9') {
-            return letter - '0';
-        } else if (letter >= 'A' && letter <= 'G') {
-            return letter - 'A' + 10;
-        }
-        return -1;
-    }
-
     /**
-     * This static function checks if the given String (g) is in a valid "number" format.
-     *
+     * checks if the given string is a valid number
      * @param a a String representing a number
-     * @return true iff the given String is in a number format
+     * @return true if the given String is in a number format
      */
     public static boolean isNumber(String a) {
         boolean ans = true;
@@ -234,6 +224,12 @@ public class Ex1 {
         return false;
     }
 
+
+    /**
+     * Checks if the input is in a valid template <number>b<base>
+     * @param number a string representing a number in template <number>b<base>
+     * @return true for a valid template, false otherwise
+     */
     public static boolean isFormatValid(String number) {
         if (!number.contains("b")) {
             return false;
@@ -273,11 +269,6 @@ public class Ex1 {
         return true;
     }
 
-    public static void ErrorPrint(String number) {
-        System.out.println("ERR num1 is in the wrong format! (" + number + ")");
-    }
-
-
     /**
      * Checks if the two numbers have the same value.
      *
@@ -294,11 +285,6 @@ public class Ex1 {
         return ans;
     }
 
-    public static String[] stringArray(String n1, String n2, String Product, String Sum) {
-        return new String[]{n1, n1, Product, Sum};
-    }
-
-
     /**
      * This static function search for the array index with the largest number (in value).
      * In case there are more than one maximum - returns the first index.
@@ -310,24 +296,23 @@ public class Ex1 {
     public static int maxIndex(String[] arr) {
         int ans = 0;
         // add your code here
+        fixArray(arr);
         int indexCounter = 0;
+        String max = arr[0];
         for (int i = 0; i < arr.length; i++) {
-            if (valueOf(arr[i]) > valueOf(arr[0])) {
-                indexCounter = indexCounter + 1;
+                if (num2Decimal(arr[i]) > num2Decimal(max)) {
+                    indexCounter = i;
+                }
             }
-        }
-        ans = indexCounter;
-        return ans;
+            ans = indexCounter;
+            return ans;
     }
 
-    public static void maxIndexPrint(String[] arr, int maxIndex) {
-        StringBuilder str = new StringBuilder("max index over ");
-        for (String index : arr) {
-            str.append("[" + index + ",");
+    public static void fixArray(String[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = getNumber(arr[i]);
+            }
         }
-        str.append("] is " + arr[maxIndex]);
-        System.out.println(str);
-    }
 
     /**
      *
@@ -336,7 +321,8 @@ public class Ex1 {
      * @param base
      */
     public static String sumOf(String num1, String num2, String base) {
-        if (isFormatValid(num1) && isFormatValid(num2)) {
+        if (isNumber(num1) && isNumber(num2)) {
+        //if (isFormatValid(num1) && isFormatValid(num2)) {
             String onlyNum1 = getNumber(num1);
             String onlyNum2 = getNumber(num2);
             int Num1 = num2Decimal(num1);
@@ -357,7 +343,8 @@ public class Ex1 {
      * @param base
      */
     public static String productOf(String num1, String num2, String base) {
-        if (isFormatValid(num1) && isFormatValid(num2)) {
+           if (isNumber(num1) && isNumber(num2)) {
+        // if (isFormatValid(num1) && isFormatValid(num2)) {
             String onlyNum1 = getNumber(num1);
             String onlyNum2 = getNumber(num2);
             int Num1 = num2Decimal(num1);
