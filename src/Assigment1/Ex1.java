@@ -32,7 +32,7 @@ public class Ex1 {
         if (!isNumber(num)) {
             ans = num2Decimal(num);
         }
-        if (valueOf(num) < 0) {
+        if (num2Decimal(num) < 0) {
             ans = -1;
         }
 
@@ -79,7 +79,7 @@ public class Ex1 {
         StringBuilder numberString = new StringBuilder(getNumber(number));
         numberString.reverse();
         int decimalSum = 0;
-        int base = valueOf(getBase(number));
+        int base = char2Int(getBase(number).charAt(0));
         for (int i = 0; i < numberString.length(); i++) {
             decimalSum += char2Int(numberString.charAt(i)) * Math.pow(base, i);
         }
@@ -237,41 +237,38 @@ public class Ex1 {
     }
 
     public static boolean isFormatValid(String number) {
-        if (!number.contains("b")) { // if the given number in base 10
-            if ((Integer.signum(valueOf(number)) < 0 || !number.matches("[A-G]")) && !isDecimal(number)) {
+        if (!number.contains("b")) {// if the given number in base 10
+            return isDecimal(number);
+        } else {
+            int baseInteger = 0;
+            String base = number.substring(number.indexOf("b") + 1, number.length());
+            if ((base.length() != 1) || !base.matches("[2-9A-G]")) {
                 return false;
-            } else {
-                int baseInteger = 0;
-                String base = number.substring(number.indexOf("b") + 1, number.length());
-                if ((base.length() != 1) && (!base.matches("[2-9A-G]"))) {
-                    return false;
-                }
-                if (base.matches("[A-G]")) {
-                    baseInteger = char2Int(base.charAt(0));
-                }
-                if (base.matches("[2-9]")) {
-                    baseInteger = char2Int(base.charAt(0));
-                }
-                for (char redix : getNumber(number).toCharArray()) {
-                    if (Character.isLetter(redix)) {
-                        if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
-                            return false;
-                        }
+            }
+            if (base.matches("[A-G]")) {
+                baseInteger = char2Int(base.charAt(0));
+            }
+            if (base.matches("[2-9]")) {
+                baseInteger = char2Int(base.charAt(0));
+            }
+            for (char redix : getNumber(number).toCharArray()) {
+                if (Character.isLetter(redix)) {
+                    if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
+                        return false;
                     }
-                    if (Character.isDigit(redix)) {
-                        if (((redix - '0') > baseInteger)) {
-                            return false;
-                        }
+                }
+                if (Character.isDigit(redix)) {
+                    if (((redix - '0') > baseInteger)) {
+                        return false;
                     }
                 }
             }
-        }
-        return true;
-    }
+        } return true;
+                }
 
     public static boolean isDecimal(String number) {
         for (char digit : number.toCharArray()) {
-            if ((char2Int(digit) > 10) && Character.getNumericValue(digit) > 0 || Character.isLetter(digit)) {
+            if ((char2Int(digit) > 10) && Character.getNumericValue(digit) < 0 || Character.isLetter(digit)) {
                 return false;
             }
         }
