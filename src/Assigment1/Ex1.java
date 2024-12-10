@@ -176,7 +176,7 @@ public class Ex1 {
      * @return true for a valid template, false otherwise
      */
     public static boolean isFormatValid(String number) {
-        if (!number.contains("b")) {
+        if (!number.contains("b") || getNumber(number) == "" || number.contains(" ") || countOccurrences(number, 'b')) {
             return false;
         } else {
             int baseInteger = 0;
@@ -189,12 +189,16 @@ public class Ex1 {
             }
             for (char redix : getNumber(number).toCharArray()) {
                 if (Character.isLetter(redix)) {
-                    if (Character.getNumericValue(redix) >= baseInteger) {
+                    if (Character.isLowerCase(redix)) {
+                        return false;
+                    }
+                      if (getNumericValue(redix) >= baseInteger) {
                         return false;
                     }
                 }
                 if (Character.isDigit(redix)) {
-                    if (((redix - '0') > baseInteger)) {
+                    //if (((redix - '0') > baseInteger)) {
+                    if (((redix - '0') >= baseInteger)) {
                         return false;
                     }
                 }
@@ -306,4 +310,39 @@ public class Ex1 {
         }
         return "";
     }
+
+    /**
+     *
+     * @param letter
+     * @return
+     */
+    public static int getNumericValue(char letter) {
+        return (letter - 'A') + 10;
+    }
+
+    /**
+     * method that checks the Edge Case of 'b' appearing more than once in a given string
+     * @param number a string representing a number
+     * @return true if 'b' is appearing only once, false in 'b' appears more than once
+     */
+    public static boolean isCharAppearsMoreThanOnce(String number) {
+        if (number.indexOf("b") != number.lastIndexOf("b")) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean countOccurrences(String str, char targetChar) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == targetChar) {
+                count++;
+            }
+        }
+        if (count > 1) {
+            return true;
+        }
+        return false;
+    }
+
 }
