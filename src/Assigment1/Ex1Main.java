@@ -24,7 +24,7 @@ public class Ex1Main {
                 }
                 else {
                     System.out.println("num2 = " + num1 + " is number : " + isNumber(num1) + ", value: " + number2Int(num1));
-                    //ErrorPrint(num1);
+                    System.out.println("ERR: num1 is in the wrong format! (" + num1 + ")");
                     main(null);
                 }
             }
@@ -36,7 +36,7 @@ public class Ex1Main {
                 }
                 else {
                     System.out.println("num2 = " + num2 + " is number : " + isNumber(num2) + ", value: " + number2Int(num2));
-                    //ErrorPrint(num2);
+                    System.out.println("ERR: num2 is in the wrong format! (" + num2 + ")");
                     main(null);
                 }
             }
