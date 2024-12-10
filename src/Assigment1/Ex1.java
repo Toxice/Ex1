@@ -165,7 +165,9 @@ public class Ex1 {
           if (isNumber(String.valueOf(num))) {
             String number = decimal2Base(num, base).toString();
             ans = number + "b" + base;
-        }
+        } else {
+              ans = "";
+          }
         return ans;
     }
 
@@ -176,7 +178,7 @@ public class Ex1 {
      * @return true for a valid template, false otherwise
      */
     public static boolean isFormatValid(String number) {
-        if (!number.contains("b") || getNumber(number) == "" || number.contains(" ") || countOccurrences(number, 'b')) {
+        if (!number.contains("b") || getNumber(number) == "" || number.contains(" ") || countOccurrences(number, 'b') || number.contains("-")) {
             return false;
         } else {
             int baseInteger = 0;
@@ -187,9 +189,9 @@ public class Ex1 {
             if (base.matches("[A-G]") || base.matches("[2-9]")) {
                 baseInteger = char2Int(base.charAt(0));
             }
-            if (number.contains("-")) { // if the number is negative
-                return false;
-            }
+//            if (number.contains("-")) { // if the number is negative
+//                return false;
+//            }
             for (char DigitOrLetter : getNumber(number).toCharArray()) {
                 if (Character.isLetterOrDigit(DigitOrLetter)) {
                     if (Character.isLetter(DigitOrLetter)) {
