@@ -1,6 +1,5 @@
 package Assigment1;
 
-
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit
@@ -17,7 +16,6 @@ public class Ex1 {
     /**
      * Convert the given number (num) to a decimal representation (as int).
      * It the given number is not in a valid format returns -1.
-     *
      * @param num a String representing a number in basis [2,16]
      * @return
      */
@@ -29,7 +27,6 @@ public class Ex1 {
         if (num2Decimal(num) < 0) {
             ans = -1;
         }
-
         return ans;
     }
 
@@ -39,7 +36,7 @@ public class Ex1 {
      * @param num1 input, String representing the number in base [2,16]
      * @return the number as a String
      */
-    public static String getNumber(String num1) { // "10101110b2"
+    public static String getNumber(String num1) {
         if (!num1.contains("b")) {
             return num1;
         }
@@ -60,7 +57,6 @@ public class Ex1 {
             return "A";
         }
     }
-
 
     /**
      * run over every char element of the given string
@@ -98,11 +94,6 @@ public class Ex1 {
      */
     public static StringBuilder decimal2Base(int number, int base) {
         StringBuilder decimal = new StringBuilder();
-//        if (base == 10) {
-//            StringBuilder base10 = new StringBuilder();
-//            base10.append(number);
-//            return base10;
-//        }
         int remainder = 0, sum = 0;
         while (number != 0) {
             remainder = number % base;
@@ -156,7 +147,6 @@ public class Ex1 {
      * Calculate the number representation (in basis base)
      * of the given natural number (represented as an integer).
      * If num<0 or base is not in [2,16] the function should return "" (the empty String).
-     *
      * @param num  the natural number (include 0).
      * @param base the basis [2,16]
      * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
@@ -167,58 +157,14 @@ public class Ex1 {
         if (base == 10) {
             ans = num + "bA";
         }
-        if (isValid(Integer.toString(num))) {
+        //if (isValid(Integer.toString(num))) {
+        if (isFormatValid(Integer.toString(num))) {
             String number = decimal2Base(num, base).toString();
             ans = number + "b" + base;
         }
         return ans;
     }
 
-    /**
-     * Checks if the given number is fit to the base
-     * @return true if the number template is valid, false if the number template is not valid
-     */
-    public static boolean isValid(String number) {
-        int baseInteger = 0;
-
-        if (number.contains("b")) {
-            if (isBaseValid(number)) {
-                String base = number.substring(number.indexOf("b") + 1, number.length());
-                if (base.matches("[A-G]")) {
-                    baseInteger = char2Int(base.charAt(0));
-                }
-                if (base.matches("[2-9]")) {
-                    baseInteger = char2Int(base.charAt(0));
-                }
-                for (char redix : getNumber(number).toCharArray()) {
-                    if (Character.isLetter(redix)) {
-                        if ((char2Int(redix) > baseInteger) || (char2Int(redix) == baseInteger)) {
-                            return false;
-                        }
-                    }
-                    if (Character.isDigit(redix)) {
-                        if (((redix - '0') > baseInteger)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * checks if the given base is a valid one (between 2~9 or between A~G)
-     * @param number a String representing a base
-     * @return true if the base is valid, false otherwise
-     */
-    public static boolean isBaseValid(String number) {
-        String Base = number.substring(number.indexOf("b") + 1, number.length());
-        if ((Base.length() == 1) && (Base.matches("[2-9A-G]"))) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Checks if the input is in a valid template <number>b<base>
@@ -253,20 +199,26 @@ public class Ex1 {
                 }
             }
         } return true;
-                }
+    }
 
-    public static boolean isDecimal(String number) {
-        for (char digit : number.toCharArray()) {
-            if ((char2Int(digit) > 10) && Character.getNumericValue(digit) < 0 || Character.isLetter(digit)) {
-                return false;
-            }
+    /**
+     * checks if the given base is a valid one (between 2~9 or between A~G)
+     * @param number a String representing a base
+     * @return true if the base is valid, false otherwise
+     */
+    public static boolean isBaseValid(String number) {
+        String Base = number.substring(number.indexOf("b") + 1, number.length());
+        if (Base.equals("10")) {
+            return true;
         }
-        return true;
+        if ((Base.length() == 1) && (Base.matches("[2-9A-G]"))) {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Checks if the two numbers have the same value.
-     *
      * @param n1 first number
      * @param n2 second number
      * @return true iff the two numbers have the same values.
@@ -284,7 +236,6 @@ public class Ex1 {
      * This static function search for the array index with the largest number (in value).
      * In case there are more than one maximum - returns the first index.
      * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
-     *
      * @param arr an array of numbers
      * @return the index in the array in with the largest number (in value).
      */
@@ -296,13 +247,17 @@ public class Ex1 {
         String max = arr[0];
         for (int i = 0; i < arr.length; i++) {
                 if (num2Decimal(arr[i]) > num2Decimal(max)) {
-                    indexCounter = i;
+                    indexCounter  = indexCounter + 1;
                 }
             }
             ans = indexCounter;
             return ans;
     }
 
+    /**
+     * removing all "b<base> from Strings
+     * @param arr String Array
+     */
     public static void fixArray(String[] arr) {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = getNumber(arr[i]);
@@ -310,45 +265,37 @@ public class Ex1 {
         }
 
     /**
-     *
-     * @param num1
-     * @param num2
-     * @param base
+     * computes the sum of num1 and num2
+     * @param num1 String representing a number
+     * @param num2 String representing a number
+     * @param base String representing a base
      */
     public static String sumOf(String num1, String num2, String base) {
         if (isNumber(num1) && isNumber(num2)) {
-        //if (isFormatValid(num1) && isFormatValid(num2)) {
-            String onlyNum1 = getNumber(num1);
-            String onlyNum2 = getNumber(num2);
             int Num1 = num2Decimal(num1);
             int Num2 = num2Decimal(num2);
             int decimalSum = Num1 + Num2;
             int baseValue = valueOf(base);
             String sumByBase = String.valueOf(decimal2Base(decimalSum, baseValue));
             return sumByBase;
-            //System.out.println(num1 + " + " + num2 + " = " + num2Template(sumByBase, base));
         }
         return "";
     }
 
     /**
-     *
-     * @param num1
-     * @param num2
-     * @param base
+     * computes the product of num1 and num2
+     * @param num1 String representing a number
+     * @param num2 String representing a number
+     * @param base String representing a base
      */
     public static String productOf(String num1, String num2, String base) {
            if (isNumber(num1) && isNumber(num2)) {
-        // if (isFormatValid(num1) && isFormatValid(num2)) {
-            String onlyNum1 = getNumber(num1);
-            String onlyNum2 = getNumber(num2);
             int Num1 = num2Decimal(num1);
             int Num2 = num2Decimal(num2);
             int decimalSum = Num1 * Num2;
             int baseValue = valueOf(base);
             String sumByBase = String.valueOf(decimal2Base(decimalSum, baseValue));
             return sumByBase;
-            //System.out.println(num1 + " + " + num2 + " = " + num2Template(sumByBase, base));
         }
         return "";
     }
