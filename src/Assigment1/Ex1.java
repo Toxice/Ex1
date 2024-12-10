@@ -168,7 +168,6 @@ public class Ex1 {
         return ans;
     }
 
-
     /**
      * Checks if the input is in a valid template <number>b<base>
      * the number can only hold values of (0~9) and (A~G)

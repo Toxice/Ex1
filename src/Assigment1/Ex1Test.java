@@ -37,14 +37,14 @@ public class Ex1Test {
         @Test
         void int2NumberTest() {
             String[] good = {"4", "12", "15", "10"};
-            String[] actual = {"100b2", "1100b2", "1111b2", "1010b2"};
+            String[] expected = {"100b2", "1100b2", "1111b2", "1010b2"};
             for (int i = 0; i < good.length; i = i + 1) {
-                String expected = Ex1.int2Number(Ex1.valueOf(good[i]), 2);
-                assertEquals(expected, actual[i]);
+                String actual = Ex1.int2Number(Ex1.valueOf(good[i]), 2);
+                assertEquals(expected[i], actual);
             }
             String not_good = "-5";
-            String expected = "";
-                assertEquals(expected, Ex1.int2Number(Ex1.valueOf(not_good), 10));
+            String Expected = "";
+                assertEquals(Expected, Ex1.int2Number(Ex1.valueOf(not_good), 10));
             }
         @Test
         void maxIndexTest() {
@@ -64,4 +64,6 @@ public class Ex1Test {
         }
 
         // Add additional test functions - test as much as you can.
+
+
     }
