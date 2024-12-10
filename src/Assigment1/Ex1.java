@@ -187,22 +187,26 @@ public class Ex1 {
             if (base.matches("[A-G]") || base.matches("[2-9]")) {
                 baseInteger = char2Int(base.charAt(0));
             }
-            for (char redix : getNumber(number).toCharArray()) {
-                if (Character.isLetter(redix)) {
-                    if (Character.isLowerCase(redix)) {
-                        return false;
+            if (number.contains("-")) { // if the number is negative
+                return false;
+            }
+            for (char DigitOrLetter : getNumber(number).toCharArray()) {
+                if (Character.isLetterOrDigit(DigitOrLetter)) {
+                    if (Character.isLetter(DigitOrLetter)) {
+                        if (Character.isLowerCase(DigitOrLetter)) {
+                            return false;
+                        }
+                        if (getNumericValue(DigitOrLetter) >= baseInteger) {
+                            return false;
+                        }
                     }
-                      if (getNumericValue(redix) >= baseInteger) {
-                        return false;
+                    if (Character.isDigit(DigitOrLetter)) {
+                        //if (((redix - '0') > baseInteger)) {
+                        if (((DigitOrLetter - '0') >= baseInteger)) {
+                            return false;
+                        }
                     }
-                }
-                if (Character.isDigit(redix)) {
-                    //if (((redix - '0') > baseInteger)) {
-                    if (((redix - '0') >= baseInteger)) {
-                        return false;
-                    }
-                }
-                if (number.contains("-")) { // if the number is negative
+                } else {
                     return false;
                 }
             }
