@@ -42,7 +42,7 @@ public class Ex1Main {
             }
             System.out.println("Enter a base for Output, [2,16]");
             String base = sc.next();
-            if (isBase(base)) {
+            if (isBaseValid(base)) {
             sum = sumOf(num1, num2, base);
             product = productOf(num1, num2, base);
             System.out.println(num1 + " + " + num2 + " = " + num2Template(sum, base));

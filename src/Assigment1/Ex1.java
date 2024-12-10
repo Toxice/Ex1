@@ -53,7 +53,7 @@ public class Ex1 {
      * @return the base as a String
      */
     public static String getBase(String base) {
-        if (validBase(base)) {
+        if (isBaseValid(base)) {
             String Base = base.substring(base.indexOf("b") + 1, base.length());
             return Base;
         } else {
@@ -121,6 +121,7 @@ public class Ex1 {
         return Integer.parseInt(number);
     }
 
+
     /**
      * Takes a char representing a number and converts it to an int
      * @param letter a char representing a number
@@ -139,7 +140,7 @@ public class Ex1 {
 
     /**
      * checks if the given string is a valid number
-     * @param a a String representing a number
+     * @param a String representing a number
      * @return true if the given String is in a number format
      */
     public static boolean isNumber(String a) {
@@ -175,14 +176,13 @@ public class Ex1 {
 
     /**
      * Checks if the given number is fit to the base
-     *
      * @return true if the number template is valid, false if the number template is not valid
      */
     public static boolean isValid(String number) {
         int baseInteger = 0;
 
         if (number.contains("b")) {
-            if (validBase(number)) {
+            if (isBaseValid(number)) {
                 String base = number.substring(number.indexOf("b") + 1, number.length());
                 if (base.matches("[A-G]")) {
                     baseInteger = char2Int(base.charAt(0));
@@ -207,23 +207,18 @@ public class Ex1 {
         return true;
     }
 
-    public static boolean validBase(String number) {
-        //if (number.contains("b"))
+    /**
+     * checks if the given base is a valid one (between 2~9 or between A~G)
+     * @param number a String representing a base
+     * @return true if the base is valid, false otherwise
+     */
+    public static boolean isBaseValid(String number) {
         String Base = number.substring(number.indexOf("b") + 1, number.length());
         if ((Base.length() == 1) && (Base.matches("[2-9A-G]"))) {
             return true;
         }
         return false;
     }
-
-    public static boolean isBase(String base) {
-        int Base = valueOf(base);
-        if (Base >= 2 && Base <= 16) {
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * Checks if the input is in a valid template <number>b<base>
