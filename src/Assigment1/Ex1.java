@@ -154,6 +154,9 @@ public class Ex1 {
      */
     public static boolean isNumber(String a) {
         boolean ans = true;
+        if (!a.contains("b")) {
+            a = a + "bA";
+        }
         ans = isFormatValid(a);
         return ans;
     }
@@ -245,7 +248,7 @@ public class Ex1 {
             }
             for (char redix : getNumber(number).toCharArray()) {
                 if (Character.isLetter(redix)) {
-                    if ((char2Int(redix) >= baseInteger)) {
+                    if (Character.getNumericValue(redix) >= baseInteger) {
                         return false;
                     }
                 }
@@ -253,6 +256,9 @@ public class Ex1 {
                     if (((redix - '0') > baseInteger)) {
                         return false;
                     }
+                }
+                if (number.contains("-")) { // if the number is negative
+                    return false;
                 }
             }
         } return true;
