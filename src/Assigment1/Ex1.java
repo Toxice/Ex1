@@ -66,7 +66,7 @@ public class Ex1 {
      */
     public static int num2Decimal(String number) {
         if (!number.contains("b")) {
-            number = number + "bA";
+            return valueOf(number);
         }
         StringBuilder numberString = new StringBuilder(getNumber(number));
         numberString.reverse();
