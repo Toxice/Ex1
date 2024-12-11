@@ -24,7 +24,7 @@ public class Ex1 {
         if (isNumber(num)) {
             ans = num2Decimal(num);
         }
-        if (num2Decimal(num) < 0) {
+          if (ans < 0) {
             ans = -1;
         }
         return ans;
