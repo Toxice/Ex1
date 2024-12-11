@@ -34,5 +34,7 @@ Enter a base for Output, [2,16]
 100b2 * 11b2 = 12b10
 max number over [100b2, 11b2, 7, 12] is 12
 ```
+Comic Pause - Java for the Haters in 100 Seconds
+
 [![Funny Video About Java](https://img.youtube.com/vi/m4-HM_sCvtQ/0.jpg)](https://www.youtube.com/watch?v=m4-HM_sCvtQ)
 
