@@ -50,7 +50,6 @@ public class Ex1Test {
 
     @Test
     void maxIndexTest() {
-        // implement this test
         String good1[] = {"100bA", "10bA", "50bA", "75bA"};
         int expected1 = 0; // index of 75bA
 
@@ -67,15 +66,23 @@ public class Ex1Test {
 
     @Test
     void num2DecimalTest() {
-        String good[] = {"100b2", "10", "50b6", "AbG"};
-        String expected[] = {"4", "10", "30", "10"};
-        String[] actual = new String[4];
+        String good[] = {"100b2", "10", "50b6", "AbG", "15bA"};
+        String expected[] = {"4", "10", "30", "10", "15"};
+        String[] actual = new String[5];
             for (int i = 0; i < good.length; i = i + 1) {
                 actual[i] = String.valueOf(Ex1.num2Decimal(good[i]));
                 assertEquals(expected[i], actual[i]);
+            }
     }
 
+    @Test
+    void returningValueForNegativeNumbersTest() {
+        String negatives[] = {"-5b8", "-78b9", "-100bA", "-50b6", "-1b3", "-101b2"};
+        int expected = -1;
+        for (int i = 0; i < negatives.length; i = i + 1) {
+            assertEquals(expected, Ex1.number2Int(negatives[i]));
+        }
+
 
     }
-
     }
