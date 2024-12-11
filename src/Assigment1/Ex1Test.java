@@ -82,7 +82,25 @@ public class Ex1Test {
         for (int i = 0; i < negatives.length; i = i + 1) {
             assertEquals(expected, Ex1.number2Int(negatives[i]));
         }
+    }
 
+    @Test
+    void countOccurrencesTest() {
+        String invalids[] = {"101bb2", "50bbA", "65bb7"};
+        char targetChar = 'b';
+        for (int i = 0; i < invalids.length; i = i + 1) {
+            boolean invalid = Ex1.countOccurrences(invalids[i], targetChar);
+            assertTrue(invalid);
+        }
+    }
 
+    @Test
+    void EqualsMethodTest() {
+        String[] numbers = {"101b2", "10bA", "122b5", "40bG", "15b6", "37b9", "480bG", "252bC"};
+        String[] expected = {"5", "10", "37", "64", "11", "34", "1152", "350"};
+        for (int i = 0; i < numbers.length; i = i + 1) {
+            boolean isEqual = Ex1.equals(numbers[i], expected[i]);
+            assertTrue(isEqual);
+        }
     }
     }
