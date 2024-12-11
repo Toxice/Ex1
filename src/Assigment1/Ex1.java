@@ -250,12 +250,12 @@ public class Ex1 {
      */
     public static int maxIndex(String[] arr) {
         int ans = 0;
-        fixArray(arr);
+        num2Decimals(arr);
         int indexCounter = 0;
         String max = arr[0];
         for (int i = 0; i < arr.length; i++) {
-                if (num2Decimal(arr[i]) > num2Decimal(max)) {
-                    indexCounter  = indexCounter + 1;
+                if ((num2Decimal(arr[i]) > num2Decimal(max))) {
+                    indexCounter  = i;
                 }
             }
             ans = indexCounter;
@@ -267,9 +267,9 @@ public class Ex1 {
      * Side Method used in maxIndex
      * @param arr String Array
      */
-    public static void fixArray(String[] arr) {
+    public static void num2Decimals(String[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = getNumber(arr[i]);
+            arr[i] = String.valueOf(num2Decimal(arr[i]));
             }
         }
 
