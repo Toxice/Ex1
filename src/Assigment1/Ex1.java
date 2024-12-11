@@ -59,10 +59,9 @@ public class Ex1 {
     }
 
     /**
-     * run over every char element of the given string
-     * start from the last index of the string, multiply every element in the base to the power of the iterator (i in that case)
+     * determine if the given String is a valid representation of a number in <number>b<base> template
      * @param number the number represented in the String
-     * @return the total value of all iterations combined (or equivalently, the value of the number after converting to decimal)
+     * @return the decimal value of the String
      */
     public static int num2Decimal(String number) {
         if (!number.contains("b")) {
