@@ -252,9 +252,13 @@ public class Ex1 {
         num2Decimals(arr);
         int indexCounter = 0;
         String max = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-                if ((num2Decimal(arr[i]) > num2Decimal(max))) {
+        int maxElement = arr.length - 1;
+        for (int i = 0; i < arr.length - 1; i++) {
+                if ((num2Decimal(arr[i]) > num2Decimal(arr[i+1]))) {
                     indexCounter  = i;
+                }
+                else {
+                    indexCounter = i + 1;
                 }
             }
             ans = indexCounter;
