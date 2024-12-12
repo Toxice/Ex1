@@ -46,8 +46,8 @@ public class Ex1Test {
 
     @Test
     void maxIndexTest() {
-        String good1[] = {"100bA", "10bA", "50bA", "75bA"};
-        int expected1 = 3; // index of 75bA
+        String good1[] = {"75bA", "10bA", "100bA", "50bA"};
+        int expected1 = 2; // index of 100bA
 
         String good2[] = {"55bA", "85bA", "275bA", "150bA"};
         int expected2 = 2; // index of 275bA
